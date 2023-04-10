@@ -95,22 +95,6 @@ pre {
   border-radius: 2px;
 }
 
-button {
-  padding: 4px 12px;
-  margin: 0 4px;
-  color: white;
-  vertical-align: middle;
-  background-color: var(--coz-purple-500);
-  border: 1px solid var(--coz-purple-100);
-  border-radius: 4px;
-  user-select: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: var(--coz-purple-400);
-}
-
 /* local */
 
 body {
@@ -164,10 +148,6 @@ body {
   font-size: 2rem;
   /* border: 1px solid #000; */
   height: 144px;
-}
-
-button {
-  font-size: 2rem;
 }
 
 #root {
