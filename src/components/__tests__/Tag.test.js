@@ -34,20 +34,14 @@ describe('Enter 키 테스트', () => {
   it('Enter키를 누르면 실제 태그가 추가되어야 합니다.', async () => {
     const { queryAllByRole, container } = render(<Tag />);
     const input = container.querySelector('input');
-
     expect(input).toBeTruthy();
 
-    userEvent.type(input, 'kimcoding');
+    userEvent.type(input, 'parkhacker');
     fireEvent.keyUp(input, { key: 'Enter', code: 'Enter' });
-    await waitFor(() => {
-      expect(queryAllByRole('listitem').length).toBeGreaterThan(1);
-    });
 
     await waitFor(() => {
       const tagLength = queryAllByRole('listitem').length;
-      expect(
-        queryAllByRole('listitem')[tagLength - 1].textContent.slice(0, 9)
-      ).toBe(input.value);
+      expect(queryAllByRole('listitem')[tagLength - 1].textContent).toMatch('parkhacker');
     });
   });
 
@@ -57,10 +51,16 @@ describe('Enter 키 테스트', () => {
 
     expect(input).toBeTruthy();
 
+    userEvent.type(input, 'parkhacker');
+    fireEvent.keyUp(input, { key: 'Enter', code: 'Enter' });
+    await waitFor(() => {
+      expect(queryAllByRole('listitem').length).toBe(3);
+    });
+
     userEvent.type(input, '');
     fireEvent.keyUp(input, { key: 'Enter', code: 'Enter' });
     await waitFor(() => {
-      expect(queryAllByRole('listitem').length).toBe(2);
+      expect(queryAllByRole('listitem').length).toBe(3);
     });
   });
 
@@ -70,18 +70,25 @@ describe('Enter 키 테스트', () => {
 
     expect(input).toBeTruthy();
 
-    userEvent.type(input, 'kimcoding');
+    userEvent.type(input, 'parkhacker');
     fireEvent.keyUp(input, { key: 'Enter', code: 'Enter' });
     await waitFor(() => {
-      expect(queryAllByRole('listitem').length).toBe(2);
+      expect(queryAllByRole('listitem').length).toBe(3);
+    });
+
+    userEvent.type(input, 'parkhacker');
+    fireEvent.keyUp(input, { key: 'Enter', code: 'Enter' });
+    await waitFor(() => {
+      expect(queryAllByRole('listitem').length).toBe(3);
     });
   });
 
   it('새로운 태그가 추가되면 입력창은 초기화되어야 합니다.', async () => {
-    const { container } = render(<Tag />);
+    const { queryAllByRole, container } = render(<Tag />);
     const input = container.querySelector('input');
     expect(input).toBeTruthy();
 
+    await userEvent.type(input, 'parkhacker');
     await fireEvent.keyUp(input, { key: 'Enter', code: 'Enter' });
     await waitFor(() => {
       expect(input.value).toBe('');
