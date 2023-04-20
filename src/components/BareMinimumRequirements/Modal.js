@@ -12,8 +12,11 @@ export const ModalBackdrop = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  background-color: var(--gray-700);
-  opacity: 0.6;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ModalBtn = styled.button`
@@ -33,10 +36,6 @@ export const ModalView = styled.div.attrs((props) => ({
   // TODO : Modal창 CSS를 구현합니다.
   width: 50%;
   height: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   background-color: var(--coz-orange-600);
   border-radius: 3rem;
 
@@ -68,7 +67,7 @@ export const Modal = () => {
         {/* TODO : 조건부 렌더링을 활용해서 Modal이 열린 상태(isOpen이 true인 상태)일 때만 모달창과 배경이 뜰 수 있게 구현해야 합니다. */}
         {isOpen ? (
           <ModalBackdrop onClick={openModalHandler}>
-            <ModalView>HELLO I AM MODAL :)</ModalView>
+            <ModalView onClick={(event) => event.stopPropagation()}>HELLO I AM MODAL :)</ModalView>
           </ModalBackdrop>
         ) : (
           ""
