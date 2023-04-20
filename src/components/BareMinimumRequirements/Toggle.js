@@ -20,6 +20,7 @@ const ToggleContainer = styled.div`
       height: 32px;
       margin-left: -100%;
       background: linear-gradient(to right, var(--coz-purple-600) 50%, #8b8b8b 50%);
+      transition: margin-left 0.4s;
     }
 
     &.toggle--checked .toggle-inner {
